@@ -9,6 +9,10 @@ function App() {
   const increment = () => {
     setCount(count + step);
   }
+  const incrementTwice = () => {
+    setCount(prevCount => prevCount + 1);
+    setCount(prevCount => prevCount + 1); 
+  }
   const decrement = () => {
     setCount(count - step);
   }
@@ -36,6 +40,10 @@ function App() {
       <button onClick={increment}
         style={{backgroundColor: 'green', color: 'white', padding: '10px 20px', fontSize: '16px'}}>
       Increment</button>
+      <button onClick={incrementTwice}
+        style={{backgroundColor: 'green', color: 'white', padding: '10px 20px', fontSize: '16px', marginLeft: '10px'}
+        }>
+      +2</button>
       <br />
       <br />
       <button onClick={reset} 
