@@ -2,6 +2,7 @@ import './App.css'
 import {useState} from 'react';
 
 function App() {
+  //First 
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
 
@@ -10,8 +11,8 @@ function App() {
     setCount(count + step);
   }
   const incrementTwice = () => {
-    setCount(prevCount => prevCount + 1);
-    setCount(prevCount => prevCount + 1); 
+    setCount(c => c + 1);
+    setCount(c => c + 1); 
   }
   const decrement = () => {
     setCount(count - step);
@@ -20,8 +21,20 @@ function App() {
     setCount(0);
   }
 
+
+  //Second
+  const [counters, setCounters] = useState([{id: 1, value: 0}]);
+  const addCounter = () => {
+    setCounters([...counters, {id: counters.length + 1, value: 0}]);
+  };
+  const incrementCounter = (id) => {
+    setCounters(counters.map(counter => 
+      counter.id === id ? {...counter, value: counter.value + 1} : counter
+    ));
+  }
+
   return (
-    <div className="app-container">
+    <div className="main-container">
       <h1>Counter Value : {count}</h1>
       <input type='number'
         value = {step}
@@ -54,7 +67,31 @@ function App() {
       <button onClick={decrement}
         style={{backgroundColor: 'blue', color: 'white', padding: '10px 20px', fontSize: '16px'}}
       >Decrement</button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+        <button onClick={addCounter}>Add Counter</button>
+        <ul>
+          {
+            counters.map(counter => (
+              <li key={counter.id}>Counter {counter.id} : {counter.value}
+              <button onClick={() => incrementCounter(counter.id)} style={{margin:'10px'}}>Increment</button>
+              <button onClick={() => setCounters(counters.filter(c => c.id !== counter.id))} style={{margin:'10px'}}>Remove</button>
+              
+              </li>
+            ))
+          }
+        </ul>
     </div>
+
+
+
+
+
       
   )
 }
